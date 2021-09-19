@@ -75,6 +75,5 @@ void visitaP(GRAFO *g, int u, int *cor)
         cor[u] = VERMELHO;
     }
     
-
 }
 

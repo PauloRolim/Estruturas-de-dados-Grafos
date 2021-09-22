@@ -7,6 +7,8 @@
  ** No final do algoritmo, não há arestas restantes, e a sequência a partir da qual as arestas foram escolhidas 
  ** forma um ciclo Euleriano se o grafo não tiver vértices de grau ímpar, ou um caminho Euleriano 
  ** se houver exatamente dois vértices de grau ímpar.
+ ** A complexidade é de O(E+V)², porque para localizar as arestas que são pontes (função isValidNextEdge()), é preciso realizar a Busca 
+ ** em profundidade logo em seguinda remove-se uma aresta, depois repete a DFS e depois disso a aresta removida é adicionada novamente.
 */
 
 #include <iostream>
@@ -58,7 +60,7 @@ void dfs(vector<int> graph[], int v, vector<bool>& visited) //função que reali
 
 bool isValidNextEdge(vector<int> graph[], int u, int v) // A aresta entre "u-v" é válida se ocorrer um dos seguintes casos:
 {                                                       // 1) Se v for o único vértice adjacente a u;                                      
-	int count = 0;                                      // 2) Se houverem múltiplas arestass adjacentes, e a aresta "u-v" não for uma ponte;
+	int count = 0;                                      // 2) Se houverem múltiplas arestas adjacentes, e a aresta "u-v" não for uma ponte;
     for (auto av : graph[u])                            
     {
         if (av != -1)
@@ -92,12 +94,12 @@ bool isConnected(vector<int> graph[]) //Função que checa se há conexão entre
         if (graph[i].size() != 0)
             break;
 
-    // Se não houver nenhum vértice no grago, retorna verdadeiro
+    // Se não houver nenhum vértice no grafo, retorna verdadeiro
     if (i == V)
         return true;
 
     
-    // Começa a busca em profundidade de um vértice que possui grau maior que zero
+    // Chama a busca em profundidade de um vértice que possui grau maior que zero
     dfs(graph, i, visited);
 
     // Verifica se todos os vértices com grau diferente de zero foram visitados
@@ -116,11 +118,12 @@ void eulerCycle(vector<int> graph[], int u)
     {
         if (av != -1 && isValidNextEdge(graph, u, av)) //Checa se a próxima aresta é válida;
         {
-            cout << u << "-" << av << "  " << endl; //exibe na tela o vértice por onde passou
+            cout << u << "-" << av << "  "; //exibe na tela o vértice por onde passou
             removeEdge(graph, u, av); //remove o vértice do grafo
             eulerCycle(graph, av); //chama novamente a função, e passa para o próximo vértice
         }
     }
+    
 }
 
 int isEulerian(vector<int> graph[]) //Função que verifica se o grafo é euleriano

@@ -1,4 +1,4 @@
-#include "ciclo_euler.cpp"
+#include "fleury.cpp"
 
 int main(){
 
@@ -37,6 +37,7 @@ int main(){
 
     cout << "Caminho Euleriano: " << endl;
     eulerCycle(grafo, oddDegreeVertex);
+    cout << endl;
     return 0;
 
 }

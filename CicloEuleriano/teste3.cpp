@@ -7,8 +7,6 @@ int main(){
     addEdge(grafo, 0, 1);
     addEdge(grafo, 0, 2);
     addEdge(grafo, 0, 3);
-    addEdge(grafo, 0, 4);
-    addEdge(grafo, 1, 2);
     addEdge(grafo, 3, 4);
 
     int ret = isEulerian(grafo);
@@ -36,7 +34,7 @@ int main(){
         }
     }
 
-    cout << "Ciclo Euleriano: " << endl;
+    cout << "Caminho Euleriano: " << endl;
     eulerCycle(grafo, oddDegreeVertex);
     cout << endl;
     return 0;
